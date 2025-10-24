@@ -1,20 +1,20 @@
 Option Explicit
 
-' ƒOƒ[ƒoƒ‹•Ï”
+' ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°
 Public EXTRACT_SHEET As Worksheet
 Public GRAPH_SHEET As Worksheet
-' ƒOƒ[ƒoƒ‹’è”
-Public Const dateCol As Integer = 2 ' ”NŒ“ú—ñ
-Public Const timeCol As Integer = 3 ' •ª•b—ñ
-Public Const locateCol As Integer = 23 ' k‰›’n–¼—ñ
+' ã‚°ãƒ­ãƒ¼ãƒãƒ«å®šæ•°
+Public Const dateCol As Integer = 2 ' å¹´æœˆæ—¥åˆ—
+Public Const timeCol As Integer = 3 ' æ™‚åˆ†ç§’åˆ—
+Public Const locateCol As Integer = 23 ' éœ‡å¤®åœ°ååˆ—
 
-' ƒIƒuƒWƒFƒNƒg‘ã“ü
+' ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆä»£å…¥
 Public Sub setObj()
-    Set EXTRACT_SHEET = ThisWorkbook.Worksheets("’Šo")
-    Set GRAPH_SHEET = ThisWorkbook.Worksheets("ƒOƒ‰ƒt")
+    Set EXTRACT_SHEET = ThisWorkbook.Worksheets("æŠ½å‡º")
+    Set GRAPH_SHEET = ThisWorkbook.Worksheets("ã‚°ãƒ©ãƒ•")
 End Sub
 
-' ƒIƒuƒWƒFƒNƒgŠJ•ú
+' ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé–‹æ”¾
 Public Sub releaseObj()
     Set EXTRACT_SHEET = Nothing
     Set GRAPH_SHEET = Nothing

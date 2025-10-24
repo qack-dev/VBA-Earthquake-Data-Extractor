@@ -1,14 +1,14 @@
 Option Explicit
 
-' key‚ªk‰›’nAvalue‚ª‰ñ”‚ÌDictionary‚ğì¬‚µo—Í
+' keyãŒéœ‡å¤®åœ°ã€valueãŒå›æ•°ã®Dictionaryã‚’ä½œæˆã—å‡ºåŠ›
 Public Sub makeLocateDict()
-    ' •Ï”éŒ¾
+    ' å¤‰æ•°å®£è¨€
     Dim dict As Object
     Dim locateRange As Range
     Dim r As Range
     Dim key As Variant
     Dim tmpRow As Long
-    ' ‘ã“ü
+    ' ä»£å…¥
     Set dict = CreateObject("Scripting.Dictionary")
     tmpRow = 2
     With EXTRACT_SHEET
@@ -17,31 +17,31 @@ Public Sub makeLocateDict()
             .Cells(.Rows.Count, locateCol).End(xlUp) _
         )
     End With
-    ' k‰›’n–¼—ñ‚ğƒ‹[ƒv‚µ“]‹L
+    ' éœ‡å¤®åœ°ååˆ—ã‚’ãƒ«ãƒ¼ãƒ—ã—è»¢è¨˜
     For Each r In locateRange
-        ' Šù‚É«‘‚Ìkey‚É‘¶İ‚µ‚½‚ç
+        ' æ—¢ã«è¾æ›¸ã®keyã«å­˜åœ¨ã—ãŸã‚‰
         If dict.exists(r.Value) Then
             dict(r.Value) = dict(r.Value) + 1
-        ' ‘¶İ‚µ‚È‚©‚Á‚½‚ç
+        ' å­˜åœ¨ã—ãªã‹ã£ãŸã‚‰
         Else
             dict(r.Value) = 1
         End If
     Next r
-    ' o—Í
+    ' å‡ºåŠ›
     With GRAPH_SHEET
-        ' •\‚ğ‰Šú‰»
+        ' è¡¨ã‚’åˆæœŸåŒ–
         .Activate
         .Range(Columns(1), Columns(2)).Delete
-        ' Œ©o‚µs“ü—Í
-        .Cells(1, 1).Value = "k‰›’n–¼"
-        .Cells(1, 2).Value = "”­¶‰ñ”"
+        ' è¦‹å‡ºã—è¡Œå…¥åŠ›
+        .Cells(1, 1).Value = "éœ‡å¤®åœ°å"
+        .Cells(1, 2).Value = "ç™ºç”Ÿå›æ•°"
         For Each key In dict.Keys
-            ' •\‚ÌƒŒƒR[ƒh“ü—Í
+            ' è¡¨ã®ãƒ¬ã‚³ãƒ¼ãƒ‰å…¥åŠ›
             .Cells(tmpRow, 1).Value = key
             .Cells(tmpRow, 2).Value = dict(key)
             tmpRow = tmpRow + 1
         Next key
-        ' ®Œ`
+        ' æ•´å½¢
         With .Range(.Cells(1, 1), .Cells(tmpRow - 1, 2))
             .EntireColumn.AutoFit
             .Borders.LineStyle = xlContinuous
@@ -50,7 +50,7 @@ Public Sub makeLocateDict()
     Cells(2, 1).Select
 End Sub
 
-' ƒ\[ƒg
+' ã‚½ãƒ¼ãƒˆ
 Public Sub sortTableExcel2007()
     Dim bodyRange As Range
     With GRAPH_SHEET
@@ -60,42 +60,42 @@ Public Sub sortTableExcel2007()
         )
     End With
     With GRAPH_SHEET.Sort
-        ' Œ»İ‚Ì•À‚Ñ‘Ö‚¦‚ğƒNƒŠƒA
+        ' ç¾åœ¨ã®ä¸¦ã³æ›¿ãˆã‚’ã‚¯ãƒªã‚¢
         .SortFields.Clear
-        ' ”­¶‰ñ”‚Å~‡
+        ' ç™ºç”Ÿå›æ•°ã§é™é †
         .SortFields.Add _
             key:=Cells(2, 2), _
             Order:=xlDescending
         .SetRange bodyRange
         .Header = xlNo
         .Orientation = xlTopToBottom
-        ' k‰›’n–¼‚Å¸‡
+        ' éœ‡å¤®åœ°åã§æ˜‡é †
         .SortFields.Add _
             key:=Cells(2, 1), _
             Order:=xlAscending
         .SetRange bodyRange
         .Header = xlNo
         .Orientation = xlTopToBottom
-        ' “K—p
+        ' é©ç”¨
         .Apply
     End With
 End Sub
 
-' ”­¶‰ñ”‚Å20ˆÊ‚Ü‚Å‚Åc–_ƒOƒ‰ƒtì¬
+' ç™ºç”Ÿå›æ•°ã§20ä½ã¾ã§ã§ç¸¦æ£’ã‚°ãƒ©ãƒ•ä½œæˆ
 Public Sub makeGraph()
-    ' •Ï”éŒ¾E‘ã“ü
+    ' å¤‰æ•°å®£è¨€ãƒ»ä»£å…¥
     Dim targetRange As Range
     Set targetRange _
     = ActiveSheet.Range(Cells(3, 4), Cells(30, 10))
     With GRAPH_SHEET
         .Activate
         
-        ' ƒGƒ‰[‚ª”­¶‚µ‚Ä‚àˆ—‚ğ‘±‚¯‚é
-        ' iƒOƒ‰ƒt‚ª1‚Â‚à‚È‚¢ê‡‚ÌƒGƒ‰[‚ğ‰ñ”ğj
+        ' ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¦ã‚‚å‡¦ç†ã‚’ç¶šã‘ã‚‹
+        ' ï¼ˆã‚°ãƒ©ãƒ•ãŒ1ã¤ã‚‚ãªã„å ´åˆã®ã‚¨ãƒ©ãƒ¼ã‚’å›é¿ï¼‰
         On Error Resume Next
-        ' ChartObjectsƒRƒŒƒNƒVƒ‡ƒ“(ƒOƒ‰ƒt)‘S‘Ì‚ğíœ
+        ' ChartObjectsã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³(ã‚°ãƒ©ãƒ•)å…¨ä½“ã‚’å‰Šé™¤
         .ChartObjects.Delete
-        ' ƒGƒ‰[ƒnƒ“ƒhƒŠƒ“ƒO‚ğŒ³‚É–ß‚·
+        ' ã‚¨ãƒ©ãƒ¼ãƒãƒ³ãƒ‰ãƒªãƒ³ã‚°ã‚’å…ƒã«æˆ»ã™
         On Error GoTo 0
         
         .Shapes.AddChart.Select
@@ -104,7 +104,7 @@ Public Sub makeGraph()
         .SetSourceData _
             Source:=Range(Cells(1, 1), Cells(21, 2))
         .ChartType = xlColumnClustered
-        .ChartTitle.Text = "’nk‚Ì”­¶‰ñ”"
+        .ChartTitle.Text = "åœ°éœ‡ã®ç™ºç”Ÿå›æ•°"
         With .Parent
             .Left = targetRange.Left
             .Top = targetRange.Top

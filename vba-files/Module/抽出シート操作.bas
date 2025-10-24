@@ -1,6 +1,6 @@
 Option Explicit
 
-'s‚Ì‰½•¶š–Ú‚©‚ç‰½•¶š–Ú‚Ü‚Å‚ğƒZƒ‹‚É“ü—Í‚·‚é‚Ì‚©‚ğ•\‚·”z—ñ‚ğì¬
+'è¡Œã®ä½•æ–‡å­—ç›®ã‹ã‚‰ä½•æ–‡å­—ç›®ã¾ã§ã‚’ã‚»ãƒ«ã«å…¥åŠ›ã™ã‚‹ã®ã‹ã‚’è¡¨ã™é…åˆ—ã‚’ä½œæˆ
 Private Function strCntAry() As Variant
     strCntAry = Array( _
         Array(1, 1), Array(2, 9), Array(10, 17), Array(18, 21), _
@@ -13,87 +13,87 @@ Private Function strCntAry() As Variant
     )
 End Function
 
-' ƒeƒLƒXƒg‚ğ“Ç‚İ‚Ş
+' ãƒ†ã‚­ã‚¹ãƒˆã‚’èª­ã¿è¾¼ã‚€
 Public Sub readText()
-    ' •Ï”éŒ¾
-    Dim filePath As Variant ' –ß‚è’l‚ªBoolean‚Ìê‡‚à‚ ‚é‚½‚ßVariantŒ^‚ÅéŒ¾
+    ' å¤‰æ•°å®£è¨€
+    Dim filePath As Variant ' æˆ»ã‚Šå€¤ãŒBooleanã®å ´åˆã‚‚ã‚ã‚‹ãŸã‚Variantå‹ã§å®£è¨€
     Dim fileNum As Long
     Dim allText As Variant
     Dim lines As Variant
     Dim lineText As Variant
     Dim i As Long: i = 0
     
-    ' ƒtƒ@ƒCƒ‹‘I‘ğƒ_ƒCƒAƒƒO‚ğ•\¦
+    ' ãƒ•ã‚¡ã‚¤ãƒ«é¸æŠãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’è¡¨ç¤º
     filePath = Application.GetOpenFilename( _
-        FileFilter:="‚·‚×‚Ä‚Ìƒtƒ@ƒCƒ‹ (*.*),*.*,ƒeƒLƒXƒg ƒtƒ@ƒCƒ‹ (*.txt),*.txt", _
-        Title:="ˆ—‚·‚éƒeƒLƒXƒgƒtƒ@ƒCƒ‹‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢" _
+        FileFilter:="ã™ã¹ã¦ã®ãƒ•ã‚¡ã‚¤ãƒ« (*.*),*.*,ãƒ†ã‚­ã‚¹ãƒˆ ãƒ•ã‚¡ã‚¤ãƒ« (*.txt),*.txt", _
+        Title:="å‡¦ç†ã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸æŠã—ã¦ãã ã•ã„" _
     )
-    ' ƒLƒƒƒ“ƒZƒ‹ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚©”»’è
+    ' ã‚­ãƒ£ãƒ³ã‚»ãƒ«ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã‹åˆ¤å®š
     If filePath = False Then
-        MsgBox "ƒtƒ@ƒCƒ‹‚ª‘I‘ğ‚³‚ê‚È‚©‚Á‚½‚½‚ßAˆ—‚ğ’†’f‚µ‚Ü‚·B"
+        MsgBox "ãƒ•ã‚¡ã‚¤ãƒ«ãŒé¸æŠã•ã‚Œãªã‹ã£ãŸãŸã‚ã€å‡¦ç†ã‚’ä¸­æ–­ã—ã¾ã™ã€‚"
         Exit Sub
     End If
     
-    ' Œ»İVBA“à‚Åg—p‚³‚ê‚Ä‚¢‚È‚¢uƒtƒ@ƒCƒ‹”Ô†v‚ğ©“®“I‚Éæ“¾i—á‚¦‚Î1j
+    ' ç¾åœ¨VBAå†…ã§ä½¿ç”¨ã•ã‚Œã¦ã„ãªã„ã€Œãƒ•ã‚¡ã‚¤ãƒ«ç•ªå·ã€ã‚’è‡ªå‹•çš„ã«å–å¾—ï¼ˆä¾‹ãˆã°1ï¼‰
     fileNum = FreeFile
-    ' æ“¾‚µ‚½ƒtƒ@ƒCƒ‹”Ô†‚Åƒtƒ@ƒCƒ‹‚ğŠJ‚­
+    ' å–å¾—ã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ç•ªå·ã§ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
     Open filePath For Input As #fileNum
     
-    ' ƒtƒ@ƒCƒ‹‚Ì‘S“à—e‚ğˆê“x‚ÉallText‚É“Ç‚İ‚Ş
-    ' LOF(fileNum)‚Íƒtƒ@ƒCƒ‹‘S‘Ì‚ÌƒoƒCƒg”‚ğ•Ô‚·
+    ' ãƒ•ã‚¡ã‚¤ãƒ«ã®å…¨å†…å®¹ã‚’ä¸€åº¦ã«allTextã«èª­ã¿è¾¼ã‚€
+    ' LOF(fileNum)ã¯ãƒ•ã‚¡ã‚¤ãƒ«å…¨ä½“ã®ãƒã‚¤ãƒˆæ•°ã‚’è¿”ã™
     allText = Input(LOF(fileNum), fileNum)
-    ' “Ç‚İ‚ñ‚¾‘SƒeƒLƒXƒg‚ğ‰üsƒR[ƒh(LF)‚Å•ªŠ„‚µA”z—ñ(lines)‚ÉŠi”[‚·‚éB
+    ' èª­ã¿è¾¼ã‚“ã å…¨ãƒ†ã‚­ã‚¹ãƒˆã‚’æ”¹è¡Œã‚³ãƒ¼ãƒ‰(LF)ã§åˆ†å‰²ã—ã€é…åˆ—(lines)ã«æ ¼ç´ã™ã‚‹ã€‚
     lines = Split(allText, vbLf)
     
-    ' ”z—ñ‚ÌŠe—v‘fiŠesj‚ğƒ‹[ƒvˆ—
+    ' é…åˆ—ã®å„è¦ç´ ï¼ˆå„è¡Œï¼‰ã‚’ãƒ«ãƒ¼ãƒ—å‡¦ç†
     For Each lineText In lines
         Call typeCells(lineText)
         Call displayProgress(i, UBound(lines))
-        ' ƒCƒ“ƒNƒŠƒƒ“ƒg
+        ' ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ãƒˆ
         i = i + 1
-        ' ˆ—’†‚ÉExcel‚ªŒÅ‚Ü‚é‚Ì‚ğ–h‚®
+        ' å‡¦ç†ä¸­ã«ExcelãŒå›ºã¾ã‚‹ã®ã‚’é˜²ã
         DoEvents
     Next lineText
     Call arrange
-    ' ƒXƒe[ƒ^ƒXƒo[‚ğŒ³‚Ìó‘Ô‚É–ß‚·
+    ' ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒãƒ¼ã‚’å…ƒã®çŠ¶æ…‹ã«æˆ»ã™
     Application.StatusBar = False
-    ' •Â‚¶‚é
+    ' é–‰ã˜ã‚‹
     Close #fileNum
 End Sub
 
-' i’»‚ğ•\¦
+' é€²æ—ã‚’è¡¨ç¤º
 Private Sub displayProgress(nowNum As Long, maxNum As Long)
-    ' •Ï”éŒ¾
+    ' å¤‰æ•°å®£è¨€
     Dim nowPercent As Integer
     nowPercent = Int(nowNum / maxNum * 100)
     Application.StatusBar _
-    = "“]‹L’†... " _
-    & String(Int(10 - Int(nowPercent / 10)), " ") _
-    & String(Int(nowPercent / 10), "¡") _
+    = "è»¢è¨˜ä¸­... " _
+    & String(Int(10 - Int(nowPercent / 10)), "â–¡") _
+    & String(Int(nowPercent / 10), "â– ") _
     & " " & nowPercent & "%"
     
 End Sub
 
-' ’ŠoƒV[ƒg‚Ö“]‹L
+' æŠ½å‡ºã‚·ãƒ¼ãƒˆã¸è»¢è¨˜
 Private Sub typeCells(txt As Variant)
-    ' •Ï”éŒ¾
+    ' å¤‰æ•°å®£è¨€
     Dim typeRow As Integer
     Dim ary As Variant
     Dim i As Integer
     Dim txtStr As String
-    ' ‹ó”’‚ÌÅIs‚Å‚Í‚È‚¢‚È‚ç‚Î
+    ' ç©ºç™½ã®æœ€çµ‚è¡Œã§ã¯ãªã„ãªã‚‰ã°
     If txt <> "" Then
-        ' ‘ã“ü
+        ' ä»£å…¥
         ary = strCntAry
         txtStr = CStr(txt)
         With EXTRACT_SHEET
             .Activate
             typeRow = .Cells(Rows.Count, 2).End(xlUp).Row + 1
             Cells(typeRow, 1).Select
-            ' ”z—ñ‚ğƒ‹[ƒv
+            ' é…åˆ—ã‚’ãƒ«ãƒ¼ãƒ—
             For i = 0 To UBound(ary, 1)
                 With .Cells(typeRow, i + 1)
-                    ' •\¦Œ`®•ÏX‚Æ“]‹L
+                    ' è¡¨ç¤ºå½¢å¼å¤‰æ›´ã¨è»¢è¨˜
                     Select Case i + 1
                         Case dateCol
                             .NumberFormat = "yyyy/mm/dd"
@@ -128,11 +128,11 @@ Private Sub typeCells(txt As Variant)
     End If
 End Sub
 
-' ®Œ`
+' æ•´å½¢
 Private Sub arrange()
-    ' •Ï”éŒ¾
+    ' å¤‰æ•°å®£è¨€
     Dim listRange As Range
-    ' Œ©o‚µ‚ğœ‚¢‚½•\‘ã“ü
+    ' è¦‹å‡ºã—ã‚’é™¤ã„ãŸè¡¨ä»£å…¥
     With EXTRACT_SHEET
         Set listRange = .Range( _
             .Cells(3, 1), _
@@ -142,9 +142,9 @@ Private Sub arrange()
             ) _
         )
     End With
-    ' —ñ•©“®’²®
+    ' åˆ—å¹…è‡ªå‹•èª¿æ•´
     listRange.EntireColumn.AutoFit
-    ' Œrü‚ğˆø‚­
+    ' ç½«ç·šã‚’å¼•ã
     listRange.Borders.LineStyle = xlContinuous
 End Sub
 
